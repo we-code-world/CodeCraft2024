@@ -1,0 +1,29 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
+#include <bits/stdc++.h>
+#include "Ship.h"
+#include "Robot.h"
+
+class Controller
+{
+private:
+    int money, frame_id;
+
+    WorkMap work_map;
+    Ship ships[SHIP_NUM];
+    vector<Robot> robots;
+    vector<Robot> unused_robots;
+
+public:
+    Controller();
+    Controller(int x, int y, int transport_time, int loading_speed);
+    ~Controller();
+
+    void init();
+    void run();
+    void control();
+    void progress();
+};
+
+#endif

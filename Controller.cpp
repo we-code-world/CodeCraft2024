@@ -1,0 +1,85 @@
+#include "Controller.h"
+
+Controller::Controller() {
+}
+
+Controller::Controller(int x, int y, int transport_time, int loading_speed) {
+    
+}
+
+Controller::~Controller() {
+}
+
+// 初始化控制器状态信息
+void Controller::init(){
+    char** map_strs;
+    int id, x, y, time, velocity, max_capacity;
+    for(int i = 0; i < MAP_SIZE; i ++){
+        scanf("%s", map_strs[i]);
+        // 初始化所有机器人
+        for(int j = 0; j < MAP_SIZE; j ++) if(map_strs[i][j] == 'A') robots.push_back(Robot(i, j));
+    }
+    for(int i = 0; i < BERTH_NUM; i ++)
+    {
+        scanf("%d%d%d%d%d", &id, &x, &y, &time, &velocity);
+        work_map.add_berth(id, x, y, time, velocity);
+    }
+    // 根据输入地图字符串构造工作地图
+    work_map.init(map_strs);
+    scanf("%d", &max_capacity);
+    for(int i = 0; i < SHIP_NUM; i ++) ships[i].set_max_capacity(max_capacity);
+    char ok[100];
+    scanf("%s", ok);
+
+    printf("OK");
+    fflush(stdout);
+}
+
+// 处理数据，控制策略
+void Controller::progress(){
+    
+}
+
+// 控制输入输出
+void Controller::control(){
+    while (scanf("%d%d", &frame_id, &money))
+    {
+        // 输入处理
+        int num;
+        scanf("%d", &num);
+        for(int i = 1; i <= num; i ++)
+        {
+            int x, y, value;
+            scanf("%d%d%d", &x, &y, &value);
+            work_map.add_goods(x, y, value);
+        }
+        for(int i = 0; i < ROBOT_NUM; i ++)
+        {
+            int has_good, x, y, status;
+            scanf("%d%d%d%d", &has_good, &x, &y, &status);
+            robots[i].update(has_good, x, y, status);
+        }
+        for(int i = 0; i < SHIP_NUM; i ++)
+        {
+            int status, berth_id;
+            scanf("%d%d\n", &status, &berth_id);
+            ships[i].update(status, berth_id);
+        }
+        char ok[100];
+        scanf("%s", ok);
+
+        // 输出处理
+        for(int i = 0; i < robots.size(); i ++)
+            printf(robots[i].get_action());
+        for(int i = 0; i < SHIP_NUM; i ++)
+            printf(ships[i].get_action());
+        puts("OK");
+        fflush(stdout);
+    }
+}
+
+void Controller::run(){
+    thread control(Controller::control), progress(Controller::progress);
+    control.join();
+    progress.join();
+}
