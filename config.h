@@ -1,7 +1,8 @@
 #ifndef RUN_CONFIG_H
 #define RUN_CONFIG_H
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#include <thread>
 
 #define N 210
 #define SHIP_NUM 10
