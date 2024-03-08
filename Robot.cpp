@@ -27,6 +27,7 @@ void Robot::update(bool goodsadd, int now_x, int now_y, int now_status){
     status = now_status;
 }
 
-const char* get_action(){
+const char* Robot::get_action()
+{
     return "move";
 }

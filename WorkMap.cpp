@@ -32,13 +32,8 @@ Berth::Berth() {
     velocity = 0;
 }
 
-Berth::Berth(Position &pos, int transport_time, int loading_speed) {
-    Position(pos);
-    time = transport_time;
-    velocity = loading_speed;
-}
-
-Berth::Berth(int pos_x, int pos_y, int transport_time, int loading_speed) {
+Berth::Berth(int id, int pos_x, int pos_y, int transport_time, int loading_speed) {
+    berth_id = id;
     set_xy(pos_x, pos_y);
     time = transport_time;
     velocity = loading_speed;
@@ -50,10 +45,7 @@ Berth::~Berth() {
 Product::Product(){
     value = 0;
 }
-Product::Product(Position &pos, int value){
-    Position(pos);
-    set_value(value);
-}
+
 Product::Product(int x, int y, int value){
     set_xy(x, y);
     set_value(value);
@@ -62,13 +54,23 @@ Product::~Product(){
     
 }
 
+void Product::set_value(int v)
+{
+    value = v;
+}
+
+int Product::get_value()
+{
+    return value;
+}
+
 WorkMap::WorkMap(){
     memset(land, 0, sizeof(land));
     memset(ocean, 0, sizeof(ocean));
 }
 
 
-WorkMap::WorkMap(char** map_str){
+WorkMap::WorkMap(char map_str[MAP_SIZE][MAP_SIZE]) {
     WorkMap();
     init(map_str);
 }
@@ -211,7 +213,7 @@ void Product::init(queue<Position> &path) {
 
 
 // 根据输入地图字符串初始化工作地图
-void WorkMap::init(char** map_str){
+void WorkMap::init(char map_str[MAP_SIZE][MAP_SIZE]) {
     for(int i = 0; i < MAP_SIZE; i ++){
         for(int j = 0; j < MAP_SIZE; j ++){
             if(map_str[i][j] == '.') land[i][j] = true;
@@ -230,7 +232,7 @@ void WorkMap::add_goods(int x, int y, int value)
 // 添加泊点信息
 void WorkMap::add_berth(int id, int x, int y, int time, int velocity)
 {
-    berth[id] = Berth(x, y, time, velocity);
+    berth.push_back(Berth(id, x, y, time, velocity));
 }
 
 // 返回距离最近的BERTH的id

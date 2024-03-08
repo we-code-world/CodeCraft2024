@@ -1,9 +1,8 @@
 #include "Controller.h"
-using namespace std;
+//using namespace std;
 
 
-int main()
-{
+int main() {
     // 控制器对象
     Controller main_controller;
 

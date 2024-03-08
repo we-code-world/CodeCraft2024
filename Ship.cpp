@@ -34,9 +34,9 @@ void Ship::set_berth_id(int id){
     berth_id = id;
 }
 
-void Ship::set_capacity(int cap){
-    capacity = cap;
-}
+//void Ship::set_capacity(int cap){
+//    capacity = cap;
+//}
 
 void Ship::set_max_capacity(int cap){
     max_capacity = cap;

@@ -48,12 +48,11 @@ class Berth : public AbstractBox
 {
 private:
     // time为轮船在该泊位与虚拟点之间的运输时间，velocity为该泊位每帧可以装载的物品数
-    int time, velocity;
-
+    int berth_id, time, velocity;
+    
 public:
     Berth();
-    Berth(Position &pos, int time, int velocity);
-    Berth(int x, int y, int time, int velocity);
+    Berth(int id, int x, int y, int time, int velocity);
     ~Berth();
 
     void set_time(int time);
@@ -73,11 +72,10 @@ private:
 
 public:
     Product();
-    Product(Position &pos, int value);
     Product(int x, int y, int value);
     ~Product();
 
-    void set_value(int value);
+    void set_value(int v);
     int get_value();
     // 初始化物品搜索路径队列
     void init(queue<Position> &path);
@@ -87,16 +85,16 @@ class WorkMap
 {
 private:
     vector<Product> goods; // 地图上的货物价值信息表
-    Berth berth[BERTH_NUM]; // 
+    vector<Berth> berth; // 
     bool land[MAP_SIZE][MAP_SIZE], ocean[MAP_SIZE][MAP_SIZE]; // land为陆地空地表，ocean为海洋可达表
 
 public:
     WorkMap();
     ~WorkMap();
-    WorkMap(char** map);
+    WorkMap(char map[MAP_SIZE][MAP_SIZE]);
 
     // 根据输入地图字符串初始化工作地图
-    void init(char** map_str);
+    void init(char map_str[MAP_SIZE][MAP_SIZE]);
 
     // 添加货物信息
     void add_goods(int x, int y, int value);

@@ -1,6 +1,8 @@
 #include "Controller.h"
 
 Controller::Controller() {
+    money = 0;
+    frame_id = 0;
 }
 
 Controller::Controller(int m, int f) {
@@ -13,7 +15,7 @@ Controller::~Controller() {
 
 // 初始化控制器状态信息
 void Controller::init(){
-    char** map_strs;
+    char map_strs[MAP_SIZE][MAP_SIZE];
     int id, x, y, time, velocity, max_capacity;
     for(int i = 0; i < MAP_SIZE; i ++){
         scanf("%s", map_strs[i]);
@@ -80,7 +82,7 @@ void Controller::control(){
 }
 
 void Controller::run(){
-    thread control(Controller::control), progress(Controller::progress);
+    /*thread control(Controller::control), progress(Controller::progress);
     control.join();
-    progress.join();
+    progress.join();*/
 }
