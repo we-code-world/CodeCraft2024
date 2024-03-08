@@ -17,7 +17,7 @@ private:
 
 public:
     Controller();
-    Controller(int x, int y, int transport_time, int loading_speed);
+    Controller(int m, int f);
     ~Controller();
 
     void init();

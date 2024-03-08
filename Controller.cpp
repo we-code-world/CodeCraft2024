@@ -3,8 +3,9 @@
 Controller::Controller() {
 }
 
-Controller::Controller(int x, int y, int transport_time, int loading_speed) {
-    
+Controller::Controller(int m, int f) {
+    money = m;
+    frame_id = f;
 }
 
 Controller::~Controller() {
