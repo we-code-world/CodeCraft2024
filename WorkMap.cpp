@@ -226,13 +226,13 @@ void WorkMap::init(char map_str[MAP_SIZE][MAP_SIZE]) {
 // 添加货物信息
 void WorkMap::add_goods(int x, int y, int value)
 {
-    goods.push_back(Product(x, y, value));
+    goods.emplace_back(Product(x, y, value));
 }
 
 // 添加泊点信息
 void WorkMap::add_berth(int id, int x, int y, int time, int velocity)
 {
-    berth.push_back(Berth(id, x, y, time, velocity));
+    berth.emplace_back(Berth(id, x, y, time, velocity));
 }
 
 // 返回距离最近的BERTH的id

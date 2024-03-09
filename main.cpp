@@ -1,7 +1,6 @@
 #include "Controller.h"
 //using namespace std;
 
-
 int main() {
     // 控制器对象
     Controller main_controller;

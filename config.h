@@ -5,7 +5,7 @@
 #include <thread>
 
 #define N 210
-#define SHIP_NUM 10
+#define SHIP_NUM 5
 #define ROBOT_NUM 10
 #define BERTH_NUM 10
 #define MAP_SIZE 200

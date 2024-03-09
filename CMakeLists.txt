@@ -8,4 +8,5 @@ project(CodeCraft)
 aux_source_directory(. DIR_SRCS)
 
 # add the executable
-add_executable(main ${DIR_SRCS})
+add_executable(main ${DIR_SRCS} )
+# add_executable(main "main.cpp" )
